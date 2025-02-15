@@ -8,35 +8,32 @@ echo "1 = Local machine"
 echo "2 = Dedicated backup server"
 
 read -p "Enter: " userinput
-
+echo "Enter where you want these files backed up (e.g /opt/backup)"
+read -p "Directory: " backupdir
 
 if [ $userinput == '1' ]; then
-  mkdir /var/log/ftp 
-  mkdir /opt/backup
+  mkdir $backupdir 
 
-  cp /etc/vsftpd.conf /var/log/ftp
-  cp /etc/vsftpd.conf /opt/backup
+  cp /etc/vsftpd.conf $backupdir
 
-  cp -r /etc/ssh /var/log/ftp
-  cp -r /etc/ssh /opt/backup
+  cp -r /etc/ssh $backupdir
 
-  cp -r /home /var/log/ftp
-  cp -r /home /opt/backup
-
-  tar -czf ~/home/backup.tar.gz /var/log/ftp
+  cp -r /home $backupdir
+  
+  tar -czf ~/home/backup.tar.gz $backupdir
 
 else 
   echo "What is the IP of your backup server?"
   read -p "Enter IP: " backupip
-  mkdir ~/backup
+  mkdir $backupdir
 
-  cp /etc/vsftpd.conf ~/backup
+  cp /etc/vsftpd.conf $backupdir
 
-  cp -r /etc/ssh ~/backup
+  cp -r /etc/ssh $backupdir
 
-  cp -r /home ~/backup
+  cp -r /home $backupdir
 
-  tar -czf ~/home/backup.tar.gz ~/backup
+  tar -czf ~/home/backup.tar.gz $backupdir
 fi
-  scp ~/home/backup.tar.gz root@$backupip:/root
+  scp $backupdir/backup.tar.gz root@$backupip:/root
 
