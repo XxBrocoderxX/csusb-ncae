@@ -28,11 +28,24 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-while  2>1; do 
+while  true; do 
 echo "Enter a source directory: (e.g /etc/ssh)"
 read -p "Source directory: " sourcedir
 echo "Enter a destination directory: (e.g /opt/backups"
 read -p "Destination directory: " destdir
 
-rsyanc -av $sourcedir $destdir
+rsync -av $sourcedir $destdir
 
+echo "Should we add this as a cronjob to constantly replace the files with the backup directory?"
+echo "1 = Yes" 
+echo "2 = No"
+read -p "Enter: " cronselect
+
+if [ $cronselect = '1' ]; then
+    echo "*/2 * * * * root rsync -a $destdir $sourcedir" >> /etc/crontab
+
+else
+    echo "Restarting..."
+fi
+
+done

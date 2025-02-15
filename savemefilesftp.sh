@@ -3,6 +3,11 @@
 # Finally Understand: Crucial Keys, Continuous Protection Patch
 #~~~~~~~~~~#
 
+if [ "$EUID" -ne 0 ]; then
+    echo 'script requires root privileges'
+    exit 1
+fi
+
 echo "Will you be using the local machine to save these files or a dedicated backup server?"
 echo "1 = Local machine"
 echo "2 = Dedicated backup server"
