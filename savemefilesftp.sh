@@ -3,13 +3,14 @@
 # Finally Understand: Crucial Keys, Continuous Protection Patch
 #~~~~~~~~~~#
 
-Echo "Will you be using the local machine to save these files or a dedicated backup server?"
-Echo "1 = Local machine"
-Echo "2 = Dedicated backup server"
-read userinput
+echo "Will you be using the local machine to save these files or a dedicated backup server?"
+echo "1 = Local machine"
+echo "2 = Dedicated backup server"
+
+read -p "Enter: " userinput
 
 
-if userinput == "1":
+if [ $userinput == '1' ]; then
   mkdir /var/log/ftp 
   mkdir /opt/backup
 
@@ -24,9 +25,9 @@ if userinput == "1":
 
   tar -czf ~/home/backup.tar.gz /var/log/ftp
 
-else: 
+else 
   echo "What is the IP of your backup server?"
-  read backupip
+  read -p "Enter IP: " backupip
   mkdir ~/backup
 
   cp /etc/vsftpd.conf ~/backup
@@ -36,5 +37,6 @@ else:
   cp -r /home ~/backup
 
   tar -czf ~/home/backup.tar.gz ~/backup
-
+fi
   scp ~/home/backup.tar.gz root@$backupip:/root
+
