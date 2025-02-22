@@ -19,11 +19,11 @@ read -p "Directory: " backupdir
 if [ $userinput == '1' ]; then
   mkdir $backupdir 
 
-  cp /etc/vsftpd.conf $backupdir
+  cp -p /etc/vsftpd.conf $backupdir
 
-  cp -r /etc/ssh $backupdir
+  cp -rp /etc/ssh $backupdir
 
-  cp -r /home $backupdir
+  cp -rp /home $backupdir
   
   tar -czf ~/home/backup.tar.gz $backupdir
 
@@ -34,9 +34,9 @@ else
 
   cp /etc/vsftpd.conf $backupdir
 
-  cp -r /etc/ssh $backupdir
+  cp -rp /etc/ssh $backupdir
 
-  cp -r /home $backupdir
+  cp -rp /home $backupdir
 
   tar -czf ~/home/backup.tar.gz $backupdir
 fi
