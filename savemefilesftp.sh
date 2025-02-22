@@ -21,6 +21,10 @@ if [ $userinput == '1' ]; then
 
   cp -p /etc/vsftpd.conf $backupdir
 
+  cp -p /etc/fstab $backupdir
+
+  cp -rp /mnt/files $backupdir
+
   cp -rp /etc/ssh $backupdir
 
   cp -rp /home $backupdir
@@ -32,7 +36,11 @@ else
   read -p "Enter IP: " backupip
   mkdir $backupdir
 
+  cp -p /etc/fstab $backupdir
+    
   cp /etc/vsftpd.conf $backupdir
+
+  cp -rp /mnt/files $backupdir
 
   cp -rp /etc/ssh $backupdir
 
