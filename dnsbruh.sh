@@ -6,6 +6,7 @@ read -p "Ip: " ip
 read -p "How many times have you run this: " serial
 
 cp -rp /etc/bind /root/bind_backup.d
+cp -rp /etc/named.conf /root/named.conf.bak
 
 if [ ! -d /etc/bind/zones ]; then
         mkdir /etc/bind/zones
@@ -16,7 +17,7 @@ cp /etc/bind/db.empty /etc/bind/zones/reverse.ncaecybergames.org
 cp /etc/bind/db.empty /etc/bind/zones/forward.team.net
 cp /etc/bind/db.empty /etc/bind/zones/reverse.team.net
 
-cat << done > /etc/bind/named.conf.local
+cat << done > /etc/named.conf
 zone "team$team.ncaecybergames.org" IN {
         type master;
         file "/etc/bind/zones/forward.ncaecybergames.org";
