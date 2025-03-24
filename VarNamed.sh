@@ -102,5 +102,6 @@ cat << done > /var/named/zones/reverse.team.net
 5       IN      PTR     www.team$team.net.
 done
 
+chown -R named:named /var/named
 systemctl restart named
 systemctl status named
