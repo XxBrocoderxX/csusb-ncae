@@ -16,7 +16,7 @@ cp /var/named/db.empty /var/named/zones/reverse.ncaecybergames.org
 cp /var/named/db.empty /var/named/zones/forward.team.net
 cp /var/named/db.empty /var/named/zones/reverse.team.net
 
-cat << done > /var/named/named.conf.local
+cat << done > /etc/named.conf
 zone "team$team.ncaecybergames.org" IN {
         type master;
         file "/var/named/zones/forward.ncaecybergames.org";
