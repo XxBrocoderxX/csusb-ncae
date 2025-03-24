@@ -102,5 +102,6 @@ cat << done > /etc/bind/zones/reverse.team.net
 5       IN      PTR     www.team$team.net.
 done
 
+chown -R named:named /etc/bind
 systemctl restart named
 systemctl status named
