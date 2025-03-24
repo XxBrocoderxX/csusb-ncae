@@ -6,6 +6,7 @@ read -p "Ip: " ip
 read -p "How many times have you run this: " serial
 
 cp -rp /var/named /root/bind_backup.d
+cp -rp /etc/named.conf /root/named.conf.bak
 
 if [ ! -d /var/named/zones ]; then
         mkdir /var/named/zones
